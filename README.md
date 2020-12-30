@@ -1,5 +1,6 @@
 # my_page
-
+herokuにもup
+https://my-page-3939.herokuapp.com/
 ## Project setup
 ```
 yarn install
