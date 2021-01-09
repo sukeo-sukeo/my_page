@@ -3,12 +3,11 @@
     <title-box title="学んだ技術"></title-box>
       <v-row justify="center" class="mb-5">
         <v-col cols="9" sm="5" md="4"
-        v-for="data of mydata" :key="data[0]"
+        v-for="data of mydata" :key="data.category"
         >
           <skill-box
-          :category="data[0]"
-          :path="data.path"
-          :rating="data.rating"
+          :category="data.category"
+          :data="data.data"
           ></skill-box>
       </v-col>
     </v-row>
@@ -29,11 +28,7 @@ export default {
     }
   },
   methods: {
-    uppercase: function(val) {
-      return val.toUpperCase()
-    },
     formatFetchData: (data) => {
-      console.log(data);
       const setObj = data.reduce((acc, {category, path, rating}) => {
         //acc[category]がtrueだったらnew Set()
           acc[category] = acc[category] || new Set();
@@ -42,8 +37,6 @@ export default {
           return acc;
         }, {});
 
-      console.log(setObj);
-
       return Object.entries(setObj)
       .map(([category, items]) => ({category, data: [...items]}));
     }
@@ -51,8 +44,10 @@ export default {
   created: function() {
     this.$axios.get('/api/skills')
       .then((res) => this.formatFetchData(res.data))
-      .then((data) => console.log(data))
-      // .then((data) => this.mydata = data)
+      .then((data) => {
+        this.mydata = data
+        console.log(this.mydata);
+      })
   }
 }
 

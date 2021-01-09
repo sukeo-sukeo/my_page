@@ -9,12 +9,13 @@
             {{  uppercase(category) }}
           </v-card-title>
           <v-divider></v-divider>
-          <v-card-text  v-for="item in skillItems.devicons[Object.keys(skillItems.devicons)[i]]" :key="item.id">
+          <v-card-text  v-for="d in data" :key="d[0]">
             <v-row align="center">
-              <i :class=item.path 
+              <i :class=d[0]
+               v-show="d[0].split('-')[0] === 'devicon'"
                style="font-size: 2.5rem; margin-left: 10px;">
-                <v-icon v-show=item.icon x-large>{{ item.icon }}</v-icon>
                </i>
+              <v-icon v-show="d[0].split('-')[0] === 'mdi'" x-large>{{ d[0] }}</v-icon>
               <v-rating
               class="ml-3"
               readonly
@@ -22,7 +23,7 @@
               color="red"
               length="5"
               size="16"
-              :value=item.rating
+              :value=d[1]
               ></v-rating>
             </v-row>
             <v-divider></v-divider>
@@ -37,13 +38,22 @@
 
 export default {
   name: 'SkillBox',
+  data: function() {
+    return {
+      
+    }
+  },
   props: {
     category : String,
-    path : String,
-    rating : [Number, String],
+    data : Array,
+  },
+  methods: {
+    uppercase: function(val) {
+      return val.toUpperCase()
+    }
   },
   mounted: function() {
-    setTimeout(() => console.log(this.category), 500)
+    setTimeout(() => console.log(this.data), 500)
   }
 }
 </script>

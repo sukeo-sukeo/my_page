@@ -15,16 +15,8 @@ db.connect(err => {
 app.use(bodyparser.urlencoded({ extended: true }));
 app.use(bodyparser.json());
 
-
 app.get('/api/home', (req, res) => {
   db.query("select * from home", (err, docs) => {
-    if (err) console.log(err);
-    res.json(docs)
-  });
-});
-
-app.get('/api/learned', (req, res) => {
-  db.query("select * from learned", (err, docs) => {
     if (err) console.log(err);
     res.json(docs)
   });
@@ -43,6 +35,22 @@ app.get('/api/skills', (req, res) => {
     res.json(docs);
   });
 });
+
+app.get('/api/learned', (req, res) => {
+  db.query("select * from learned", (err, docs) => {
+    if (err) console.log(err);
+    res.json(docs)
+  });
+});
+
+//app.get('/api/learned', ...)
+
+//デプロイ時、app.get('/')でdocsをサーブする感じ？
+// app.use(express.static(__dirname + "/docs/"));
+app.listen(port);
+
+
+//データ挿入時の処理↓
 
 // 1	editor
 // 2	office
@@ -110,8 +118,3 @@ app.get('/api/skills', (req, res) => {
 //   });
 // });
 
-//app.get('/api/learned', ...)
-
-//デプロイ時、app.get('/')でdocsをサーブする感じ？
-// app.use(express.static(__dirname + "/docs/"));
-app.listen(port);

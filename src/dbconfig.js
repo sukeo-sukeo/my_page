@@ -1,8 +1,10 @@
+require('dotenv').config();
+
 const opt = {
-  host: "localhost",
-  user: "root",
-  password: "cbdbsql617",
-  database: "my_cms",
+  host: process.env.host,
+  user: process.env.user,
+  password: process.env.password,
+  database: process.env.database,
 };
 
 module.exports = opt
