@@ -44,9 +44,8 @@ app.get('/api/learned', (req, res) => {
 });
 
 //app.get('/api/learned', ...)
-
 //デプロイ時、app.get('/')でdocsをサーブする感じ？
-// app.use(express.static(__dirname + "/docs/"));
+// app.use(express.static(__dirname + "../docs/"));
 app.listen(port);
 
 
