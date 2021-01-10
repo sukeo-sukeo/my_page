@@ -15,10 +15,10 @@ db.connect(err => {
 app.use(bodyparser.urlencoded({ extended: true }));
 app.use(bodyparser.json());
 
-app.use(express.static(__dirname + "/../docs/"));
+app.use(express.static(__dirname + "/docs/"));
 
 app.get('/.*/', (req, res) => {
-  res.sendFile(__dirname + '/../docs/index.html');
+  res.sendFile(__dirname + '/docs/index.html');
 });
 
 app.get('/api/home', (req, res) => {
