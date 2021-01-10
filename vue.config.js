@@ -1,20 +1,11 @@
 require("dotenv").config();
-const hostname = require("os").hostname();
-
-const baseURL = (() => {
-  if (hostname.split('.')[1] === 'local') {
-    return "http://localhost:8000";
-  } else {
-    return "https://my-page-3939.herokuapp.com";
-  }
-})();
 
 module.exports = {
   devServer: {
-    proxy: baseURL
+    proxy: "http://localhost:8000",
   },
-  publicPath: '/',
-  outputDir: 'docs',
+  publicPath: "/",
+  outputDir: "docs",
   filenameHashing: false,
   productionSourceMap: false,
   transpileDependencies: ["vuetify"],

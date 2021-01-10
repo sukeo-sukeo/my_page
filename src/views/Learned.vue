@@ -35,9 +35,13 @@ export default {
     }
   },
   methods: {
-    // requireData: function() {
-    //   return require('../assets/books/books.csv')
-    // }
+     urlCheck: () => {
+      if (location.hostname === 'localhost') {
+        return "/api/learned";
+      } else {
+        return "https://my-page-3939.herokuapp.com/api/learned";
+      }
+    }
   },
   computed: {
     reverseData: function() {
@@ -45,7 +49,8 @@ export default {
     }
   },
   created: function() {
-    this.$axios.get("/api/learned").then((res) => this.mydata = res.data).then(() => console.log(this.mydata))
+    const URL = this.urlCheck();
+    this.$axios.get(URL).then((res) => this.mydata = res.data).then(() => console.log(this.mydata))
   },
 }
 </script>

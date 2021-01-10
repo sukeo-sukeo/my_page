@@ -55,15 +55,20 @@ export default {
     }
   },
   methods: {
-    getform: function() {
-      
+     urlCheck: () => {
+      if (location.hostname === 'localhost') {
+        return "/api/home";
+      } else {
+        return "https://my-page-3939.herokuapp.com/api/home";
+      }
     }
   },
   mounted: function() {
     
   },
   created: function() {
-    this.$axios.get("/api/home").then((res) => this.mydata = res.data[0]).then(() => console.log(this.mydata))
+    const URL = this.urlCheck();
+    this.$axios.get(URL).then((res) => this.mydata = res.data[0]).then(() => console.log(this.mydata))
   },
   components: {
     HomeBox,

@@ -39,10 +39,18 @@ export default {
 
       return Object.entries(setObj)
       .map(([category, items]) => ({category, data: [...items]}));
+    },
+    urlCheck: () => {
+      if (location.hostname === 'localhost') {
+        return "/api/skills";
+      } else {
+        return "https://my-page-3939.herokuapp.com/api/skills";
+      }
     }
   },
   created: function() {
-    this.$axios.get('/api/skills')
+    const URL = this.urlCheck();
+    this.$axios.get(URL)
       .then((res) => this.formatFetchData(res.data))
       .then((data) => {
         this.mydata = data

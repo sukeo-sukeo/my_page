@@ -38,9 +38,17 @@ export default {
     },
   },
   methods: {
+     urlCheck: () => {
+      if (location.hostname === 'localhost') {
+        return "/api/product";
+      } else {
+        return "https://my-page-3939.herokuapp.com/api/product";
+      }
+    }
   },
   created: function() {
-    this.$axios.get("/api/product")
+    const URL = this.urlCheck();
+    this.$axios.get(URL)
     .then((res) => this.mydata = res.data)
     .then((data) => {
       data.forEach((d, i)=> {
