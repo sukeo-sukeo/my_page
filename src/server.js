@@ -15,6 +15,12 @@ db.connect(err => {
 app.use(bodyparser.urlencoded({ extended: true }));
 app.use(bodyparser.json());
 
+app.use(express.static(__dirname + "/../docs/"));
+
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/../docs/index.html');
+});
+
 app.get('/api/home', (req, res) => {
   db.query("select * from home", (err, docs) => {
     if (err) console.log(err);
@@ -43,9 +49,6 @@ app.get('/api/learned', (req, res) => {
   });
 });
 
-//app.get('/api/learned', ...)
-//デプロイ時、app.get('/')でdocsをサーブする感じ？
-// app.use(express.static(__dirname + "../docs/"));
 app.listen(port);
 
 
