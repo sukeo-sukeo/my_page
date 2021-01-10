@@ -29,7 +29,7 @@
           </v-card-title>
           <v-card-subtitle>
             <v-chip class="ma-1"
-             v-for="usedSkill in usedSkills" :key="usedSkill">
+             v-for="usedSkill in usedSkills.skillName" :key="usedSkill.id">
             {{ usedSkill }}
             </v-chip>
           </v-card-subtitle>
@@ -85,7 +85,7 @@ export default {
     title: String,
     descript: String,
     src: String,
-    usedSkills: Array
+    usedSkills: [String, Object]
     },
   data: function() {
     return {
@@ -96,7 +96,7 @@ export default {
     
   },
   created: function() {
-
+    
   },
   components: {
     MosyaDropMenu

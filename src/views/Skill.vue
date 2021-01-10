@@ -1,56 +1,54 @@
 <template>
   <v-container>
     <title-box title="学んだ技術"></title-box>
-    <v-row justify="center" class="mb-5">
-      <v-col cols="9" sm="5" md="4"
-      v-for="(item, i) in Object.keys(skillItems.devicons)" :key="item.i"
-      >
-        <v-card>
-          <v-card-title class="grey--text pa-2"
-          style="background-color: ghostwhite;">
-          <v-icon class="mr-2">mdi-laptop-chromebook</v-icon>
-            {{  uppercase(item) }}
-          </v-card-title>
-          <v-divider></v-divider>
-          <v-card-text  v-for="item in skillItems.devicons[Object.keys(skillItems.devicons)[i]]" :key="item.id">
-            <v-row align="center">
-              <i :class=item.path 
-               style="font-size: 2.5rem; margin-left: 10px;">
-                <v-icon v-show=item.icon x-large>{{ item.icon }}</v-icon>
-               </i>
-              <v-rating
-              class="ml-3"
-              readonly
-              empty-icon=""
-              color="red"
-              length="5"
-              size="16"
-              :value=item.rating
-              ></v-rating>
-            </v-row>
-            <v-divider></v-divider>
-          </v-card-text>
-        </v-card>
+      <v-row justify="center" class="mb-5">
+        <v-col cols="9" sm="5" md="4"
+        v-for="data of mydata" :key="data.category"
+        >
+          <skill-box
+          :category="data.category"
+          :data="data.data"
+          ></skill-box>
       </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script>
+import SkillBox from '../components/SkillBox.vue';
 import TitleBox from '../components/TitleBox.vue';
 
 export default {
   name: 'Skill',
-  components: { TitleBox },
+  components: { TitleBox, SkillBox },
   data: function() {
     return {
-      skillItems: require('../assets/skill/skillData.js')
+      skillItems: require('../assets/skill/skillData.js'),
+      mydata: []
     }
   },
   methods: {
-    uppercase: function(val) {
-      return val.toUpperCase()
+    formatFetchData: (data) => {
+      const setObj = data.reduce((acc, {category, path, rating}) => {
+        //acc[category]がtrueだったらnew Set()
+          acc[category] = acc[category] || new Set();
+        //pathとratingを加える
+          acc[category].add([path, rating]);
+          return acc;
+        }, {});
+
+      return Object.entries(setObj)
+      .map(([category, items]) => ({category, data: [...items]}));
     }
+  },
+  created: function() {
+    this.$axios.get('/api/skills')
+      .then((res) => this.formatFetchData(res.data))
+      .then((data) => {
+        this.mydata = data
+        console.log(this.mydata);
+      })
   }
 }
+
 </script>

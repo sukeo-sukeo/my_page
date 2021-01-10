@@ -20,11 +20,7 @@
               </v-col>
               <v-col cols="10" sm="9">
                 <v-card-text>
-                  本業の傍らプログラムやWeb関連の知識、デザインを学習中。<br>
-                  主に書籍、Udemy、paiza等から学び、webサービスやアプリを作りながら独学しています。<br>
-                  没頭するタイプで、プログラムでものをつくっている時がとにかく楽しくて大好き！<br>
-                  得意な言語はJavaScriptです。<br>
-                  現在はサーバーサイドにPHPを猛勉強中です。
+                  {{ message }}
                 </v-card-text>
               </v-col>
                <v-col cols="12">
@@ -48,14 +44,22 @@ import ShuffleText from "shuffle-text"
 export default {
   components: { ClockBox },
   name: 'ProfileBox',
+  props: {
+    message: String
+  },
   data: function() {
     return {
+     
     }
+  },
+  methods: {
+    
   },
   mounted: function() {
     const title = document.getElementById('title')
     const shulle =  new ShuffleText(title)
     shulle.start()
+    setTimeout(() => console.log(this.message), 500)
   }
 }
 </script>

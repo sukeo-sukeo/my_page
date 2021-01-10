@@ -1,5 +1,8 @@
 module.exports = {
-  publicPath: '/my_page',
+  devServer: {
+    proxy: 'http://localhost:8000'
+  },
+  publicPath: '/',
   outputDir: 'docs',
   filenameHashing: false,
   productionSourceMap: false,

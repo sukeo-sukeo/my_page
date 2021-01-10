@@ -7,9 +7,9 @@
         <product-box
         :link=item.link
         :title=item.title 
-        :descript=item.description
-        :src="require(`../assets/product/img/${item.path}`)"
-        :usedSkills=item.use
+        :descript=item.descript
+        :src="require(`../assets/product/img/${item.src}`)"
+        :usedSkills=item.used_skill
         >
         </product-box>
       </v-col>
@@ -29,17 +29,27 @@ export default {
   },
   data: function() {
     return {
-      productItems: require('../assets/product/productData.js'),
+      mydata: []
       }
     },
   computed: {
     reverseItems: function() {
-        return this.productItems.madeItemData.slice().reverse();
+        return this.mydata.slice().reverse();
     },
   },
   methods: {
   },
   created: function() {
+    this.$axios.get("/api/product")
+    .then((res) => this.mydata = res.data)
+    .then((data) => {
+      data.forEach((d, i)=> {
+        const obj = {};
+        obj.id = i;
+        obj.skillName = d.used_skill.split(',');
+        d.used_skill = obj;
+      });
+    })
   }
 }
 

@@ -3,10 +3,10 @@
 
    <v-row justify="center">
      <v-col cols="12">
-       <profile-box></profile-box>
+       <profile-box :message="mydata.message"></profile-box>
      </v-col>
    </v-row>
-
+   
    <v-row justify="center">
      <v-col cols='10' sm='5' md='4' lg='3'
       v-for="item in contentItems" :key="item.link">
@@ -25,6 +25,7 @@ export default {
   name: 'Home',
   data() {
     return {
+      mydata: '',
       contentItems: [
         {
           link: "/product",
@@ -52,6 +53,17 @@ export default {
         }
       ]
     }
+  },
+  methods: {
+    getform: function() {
+      
+    }
+  },
+  mounted: function() {
+    
+  },
+  created: function() {
+    this.$axios.get("/api/home").then((res) => this.mydata = res.data[0]).then(() => console.log(this.mydata))
   },
   components: {
     HomeBox,

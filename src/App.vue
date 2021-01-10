@@ -2,7 +2,7 @@
   <v-app>
 
     <v-navigation-drawer app dark v-model="drawer" class="d-flex d-sm-none">
-      <side-menu ></side-menu>
+      <side-menu></side-menu>
     </v-navigation-drawer>
 
     <v-app-bar app flat dark>

@@ -19,17 +19,17 @@ export const devicons = {
          office: [
            {
              id: 50,
-             icon: "mdi-microsoft-excel",
+             path: "mdi-microsoft-excel",
              rating: 4,
            },
            {
              id: 51,
-             icon: "mdi-microsoft-word",
+             path: "mdi-microsoft-word",
              rating: 3,
            },
            {
              id: 52,
-             icon: "mdi-microsoft-powerpoint",
+             path: "mdi-microsoft-powerpoint",
              rating: 3,
            },
          ],

@@ -3,15 +3,15 @@
     <title-box title="学んだ書籍/動画"></title-box>
     <v-row justify="center">
       <v-col cols="10" sm="4" md="3"
-       v-for="data in requireData()" :key="data.title">
+       v-for="data in reverseData" :key="data.id">
        
         <books-box
-         :link=data[10]
-         :src=data[9]
-         :title=data[0]
-         :descript=data[7]
-         :auther=data[2]
-         :publisher=data[4]
+         :link=data.link
+         :src=data.src
+         :title=data.title
+         :descript=data.descript
+         :auther=data.auther
+         :publisher=data.publisher
         ></books-box>
 
       </v-col>
@@ -31,15 +31,21 @@ export default {
     },
   data: () => {
     return {
+      mydata: []
     }
   },
   methods: {
-    requireData: function() {
-      return require('../assets/books/books.csv')
+    // requireData: function() {
+    //   return require('../assets/books/books.csv')
+    // }
+  },
+  computed: {
+    reverseData: function() {
+      return this.mydata.slice().reverse();
     }
   },
   created: function() {
-
-  }
+    this.$axios.get("/api/learned").then((res) => this.mydata = res.data).then(() => console.log(this.mydata))
+  },
 }
 </script>
