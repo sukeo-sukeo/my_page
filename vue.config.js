@@ -1,6 +1,17 @@
+require("dotenv").config();
+const hostname = require("os").hostname();
+
+const baseURL = (() => {
+  if (hostname.split('.')[1] === 'local') {
+    return "http://localhost:8000";
+  } else {
+    return "https://my-page-3939.herokuapp.com";
+  }
+})();
+
 module.exports = {
   devServer: {
-    proxy: 'http://localhost:8000'
+    proxy: baseURL
   },
   publicPath: '/',
   outputDir: 'docs',
