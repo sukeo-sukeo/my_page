@@ -16,7 +16,7 @@ app.use(bodyparser.urlencoded({ extended: true }));
 app.use(bodyparser.json());
 
 app.use(express.static(__dirname + "/docs/"));
-
+console.log(__dirname);
 app.get('/.*/', (req, res) => {
   res.sendFile(__dirname + '/docs/index.html');
 });
