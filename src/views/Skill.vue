@@ -50,13 +50,9 @@ export default {
   },
   created: function() {
     const URL = this.urlCheck();
-    console.log(URL);
     this.$axios.get(URL)
       .then((res) => this.formatFetchData(res.data))
-      .then((data) => {
-        this.mydata = data
-        console.log(this.mydata);
-      })
+      .then((data) => this.mydata = data)
   }
 }
 

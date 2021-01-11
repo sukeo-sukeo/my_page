@@ -57,9 +57,8 @@ export default {
   },
   mounted: function() {
     const title = document.getElementById('title')
-    const shulle =  new ShuffleText(title)
-    shulle.start()
-    setTimeout(() => console.log(this.message), 500)
+    const shuffle =  new ShuffleText(title)
+    shuffle.start()
   }
 }
 </script>

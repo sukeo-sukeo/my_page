@@ -50,7 +50,7 @@ export default {
   },
   created: function() {
     const URL = this.urlCheck();
-    this.$axios.get(URL).then((res) => this.mydata = res.data).then(() => console.log(this.mydata))
+    this.$axios.get(URL).then((res) => this.mydata = res.data)
   },
 }
 </script>

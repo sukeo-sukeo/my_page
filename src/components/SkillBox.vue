@@ -53,7 +53,6 @@ export default {
     }
   },
   mounted: function() {
-    setTimeout(() => console.log(this.data), 500)
   }
 }
 </script>
