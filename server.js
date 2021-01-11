@@ -15,7 +15,7 @@ db.connect(err => {
 app.use(bodyparser.urlencoded({ extended: true }));
 app.use(bodyparser.json());
 
-app.use(express.static(__dirname + "/docs/"));
+app.use(express.static(__dirname + "/docs"));
 
 //api/以下をparamsで変数にすれば簡潔
 app.get('/api/home', (req, res) => {
