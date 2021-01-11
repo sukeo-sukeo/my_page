@@ -17,7 +17,7 @@ app.use(bodyparser.json());
 
 app.use(express.static(__dirname + "/docs/"));
 
-app.get('/.*/', (req, res) => {
+app.get('/', (req, res) => {
   res.sendFile(__dirname + '/docs/index.html');
 });
 
