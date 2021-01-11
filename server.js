@@ -21,18 +21,18 @@ app.use(express.static(__dirname + "/docs/"));
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/docs/index.html');
 });
-// app.get('/product', (req, res) => {
-//   res.sendFile(__dirname + '/docs/index.html');
-// });
-// app.get('/skill', (req, res) => {
-//   res.sendFile(__dirname + '/docs/index.html');
-// });
-// app.get('/learned', (req, res) => {
-//   res.sendFile(__dirname + '/docs/index.html');
-// });
-// app.get('/contact', (req, res) => {
-//   res.sendFile(__dirname + '/docs/index.html');
-// });
+app.get('/product', (req, res) => {
+  res.sendFile(__dirname + '/docs/index.html');
+});
+app.get('/skill', (req, res) => {
+  res.sendFile(__dirname + '/docs/index.html');
+});
+app.get('/learned', (req, res) => {
+  res.sendFile(__dirname + '/docs/index.html');
+});
+app.get('/contact', (req, res) => {
+  res.sendFile(__dirname + '/docs/index.html');
+});
 
 //各ページのデータ取得の記述
 app.get('/api/home', (req, res) => {
