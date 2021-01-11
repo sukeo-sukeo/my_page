@@ -68,6 +68,7 @@ export default {
   },
   created: function() {
     const URL = this.urlCheck();
+    console.log(URL);
     this.$axios.get(URL).then((res) => this.mydata = res.data[0]).then(() => console.log(this.mydata))
   },
   components: {
