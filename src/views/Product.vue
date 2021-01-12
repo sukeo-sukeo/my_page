@@ -47,8 +47,8 @@ export default {
     }
   },
   created: function() {
-    const URL = this.urlCheck();
-    this.$axios.get(URL)
+    // const URL = this.urlCheck();
+    this.$axios.get('/api/product')
     .then((res) => this.mydata = res.data)
     .then((data) => {
       data.forEach((d, i)=> {

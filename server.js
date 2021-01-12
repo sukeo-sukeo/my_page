@@ -20,14 +20,15 @@ app.use(bodyparser.json());
 
 app.use(history());
 
+app.use('/', express.static(docs));
+
 app.get('/', (req, res) => {
   res.sendFile(path.join(docs, 'index.html'));
 })
-app.use('/', express.static(docs));
-// app.use(express.static(__dirname + "/docs"));
 
 //api/以下をparamsで変数にすれば簡潔
 app.get('/api/home', (req, res) => {
+  console.log(req.url);
   db.query("select * from home", (err, docs) => {
     if (err) console.log(err);
     res.json(docs)

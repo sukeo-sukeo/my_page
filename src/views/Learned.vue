@@ -49,8 +49,8 @@ export default {
     }
   },
   created: function() {
-    const URL = this.urlCheck();
-    this.$axios.get(URL).then((res) => this.mydata = res.data)
+    // const URL = this.urlCheck();
+    this.$axios.get('/api/learned').then((res) => this.mydata = res.data)
   },
 }
 </script>

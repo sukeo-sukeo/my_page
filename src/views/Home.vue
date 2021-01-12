@@ -67,8 +67,8 @@ export default {
     
   },
   created: function() {
-    const URL = this.urlCheck();
-    this.$axios.get(URL).then((res) => this.mydata = res.data[0])
+    // const URL = this.urlCheck();
+    this.$axios.get('/api/home').then((res) => this.mydata = res.data[0])
   },
   components: {
     HomeBox,

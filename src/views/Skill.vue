@@ -49,8 +49,8 @@ export default {
     }
   },
   created: function() {
-    const URL = this.urlCheck();
-    this.$axios.get(URL)
+    // const URL = this.urlCheck();
+    this.$axios.get('/api/skills')
       .then((res) => this.formatFetchData(res.data))
       .then((data) => this.mydata = data)
   }
