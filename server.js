@@ -3,6 +3,8 @@ const port = process.env.PORT || 8000;
 const app = express();
 const history = require('connect-history-api-fallback');
 const bodyparser = require('body-parser');
+const path = require('path');
+const docs = path.join(__dirname, 'docs');
 
 const mysql = require('mysql');
 const opt = require('./dbconfig.js');
@@ -17,7 +19,12 @@ app.use(bodyparser.urlencoded({ extended: true }));
 app.use(bodyparser.json());
 
 app.use(history());
-app.use(express.static(__dirname + "/docs"));
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(docs, 'index.html'));
+})
+app.use('/', express.static(docs));
+// app.use(express.static(__dirname + "/docs"));
 
 //api/以下をparamsで変数にすれば簡潔
 app.get('/api/home', (req, res) => {
