@@ -8,34 +8,14 @@ const docs = path.join(__dirname, 'docs');
 
 const mysql = require('mysql');
 const opt = require('./dbconfig.js');
-const db = mysql.createConnection(opt);
+const db = mysql.createPool(opt);
+// const db = mysql.createConnection(opt);
 
 // db.connect(err => {
 //   if (err) throw err;
 //   console.log('db connect!');
 // })
   
-const handleDisconnect = () => {
-  db.connect(err => {
-    if (err) {
-      console.log(err);
-      setTimeout(handleDisconnect, 1000);
-    }
-  });
-  
-  db.on('error', err => {
-    console.log('db error', err);
-    if (err.code === 'PROTOCOL_CONNECTION_LOST') {
-      handleDisconnect();
-    } else {
-      throw err;
-    }
-  });
-  console.log('db connected!');
-};
-
-handleDisconnect();
-
 
 app.use(bodyparser.urlencoded({ extended: true }));
 app.use(bodyparser.json());
@@ -50,31 +30,42 @@ app.get('/', (req, res) => {
 
 //api/以下をparamsで変数にすれば簡潔
 app.get('/api/home', (req, res) => {
-  console.log(req.url);
-  db.query("select * from home", (err, docs) => {
-    if (err) console.log(err);
-    res.json(docs)
+  db.getConnection((err, connect) => {
+    connect.query("select * from home", (err, docs) => {
+      if (err) console.log(err);
+      res.json(docs);
+      connect.release();
+    });
   });
 });
 
 app.get('/api/product', (req, res) => {
-  db.query("select * from product", (err, docs) => {
-    if (err) console.log(err);
-    res.json(docs);
+  db.getConnection((err, connect) => {
+    connect.query("select * from product", (err, docs) => {
+      if (err) console.log(err);
+      res.json(docs);
+      connect.release();
+    });
   });
 });
 
 app.get('/api/skills', (req, res) => {
-  db.query("select * from skills inner join skill_category on skills.category_id = skill_category.id", (err, docs) => {
-    if (err) console.log(err);
-    res.json(docs);
+  db.getConnection((err, connect) => {
+    connect.query("select * from skills inner join skill_category on skills.category_id = skill_category.id", (err, docs) => {
+      if (err) console.log(err);
+      res.json(docs);
+      connect.release();
+    });
   });
 });
 
 app.get('/api/learned', (req, res) => {
-  db.query("select * from learned", (err, docs) => {
-    if (err) console.log(err);
-    res.json(docs)
+  db.getConnection((err, connect) => {
+    connect.query("select * from learned", (err, docs) => {
+      if (err) console.log(err);
+      res.json(docs);
+      connect.release();
+    });
   });
 });
 
