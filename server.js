@@ -15,7 +15,7 @@ const db = mysql.createConnection(opt);
 //   console.log('db connect!');
 // })
   
-const handleDisconnect = (() => {
+const handleDisconnect = () => {
   db.connect(err => {
     if (err) {
       console.log(err);
@@ -32,7 +32,9 @@ const handleDisconnect = (() => {
     }
   });
   console.log('db connected!');
-})();
+};
+
+handleDisconnect();
 
 
 app.use(bodyparser.urlencoded({ extended: true }));
