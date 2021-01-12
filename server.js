@@ -10,10 +10,30 @@ const mysql = require('mysql');
 const opt = require('./dbconfig.js');
 const db = mysql.createConnection(opt);
 
-db.connect(err => {
-  if (err) throw err;
+// db.connect(err => {
+//   if (err) throw err;
+//   console.log('db connect!');
+// })
+  
+const handleDisconnect = (() => {
+  db.connect(err => {
+    if (err) {
+      console.log(err);
+      setTimeout(handleDisconnect, 1000);
+    }
+  });
+  
+  db.on('error', err => {
+    console.log('db error', err);
+    if (err.code === 'PROTOCOL_CONNECTION_LOST') {
+      handleDisconnect();
+    } else {
+      throw err;
+    }
+  });
   console.log('db connected!');
-});
+})();
+
 
 app.use(bodyparser.urlencoded({ extended: true }));
 app.use(bodyparser.json());
@@ -55,8 +75,6 @@ app.get('/api/learned', (req, res) => {
     res.json(docs)
   });
 });
-
-
 
 
 //ページリロード時の対策...(未確定)
